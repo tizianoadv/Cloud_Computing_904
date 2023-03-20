@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: monitor-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: monitor
+  template:
+    metadata:
+      labels:
+        app: monitor
+    spec:
+      containers:
+        - name: monitor-container
+          image: tizianoadv/monitor:latest
+          ports:
+            - containerPort: 8080
+          env:
+            - name: REDIS_HOST
+              value: "redis-database"
+      imagePullSecrets:
+        - name: monitor-docker-registry
+
+
+
+      # # Configures autoscaling based on incoming requests
+      # autoscaling:
+      #   metric:
+      #     type: "podscaled.knative.dev/requests-per-second"
+      #   min

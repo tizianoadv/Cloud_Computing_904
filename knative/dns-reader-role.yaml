@@ -1,0 +1,8 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: dns-reader
+rules:
+- apiGroups: [""]
+  resources: ["services/proxy"]
+  verbs: ["get"]
