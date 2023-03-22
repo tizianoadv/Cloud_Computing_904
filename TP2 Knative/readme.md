@@ -20,6 +20,7 @@ kubectl get pods
 kubectl port-forward monitor-deployment-5f968c5c7c-fx9p2 8888:8080
 
 
+
 docker build -t monitor -f Dockerfile.function .
 docker tag monitor:latest tizianoadv/monitor:latest
 docker push tizianoadv/monitor:latest
@@ -75,3 +76,7 @@ kubectl apply -f monitoring-service.yaml
 kn service list
 
 kubectl logs -l serving.knative.dev/service=monitoring-service -f
+
+kubectl delete deployment monitor-deployment && kubectl apply -f function.yml && kubectl get pods
+
+kubectl logs monitor-deployment-5f968c5c7c-h8qx4 -c monitor-container

@@ -8,8 +8,6 @@ WORKDIR /app
 # Install any needed packages specified in requirements.txt
 COPY . .
 RUN pip install --no-cache-dir -r requirements.txt
-RUN apt update && apt install curl
-RUN curl http://database-service
 
 # Run the serverless function when the container launches
-CMD ["curl", "http://database-service"]
+CMD ["python3", "app.py"]
