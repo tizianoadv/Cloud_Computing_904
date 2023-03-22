@@ -1,14 +1,18 @@
 from flask import Flask, request, jsonify, render_template
-import redis
+import redis, os
 
 app = Flask(__name__)
 
 # connect to Redis database
-redis_host = "redis-service"
-redis_port = 6379
-redis_password = ""
-redis_db = 0
-redis_conn = redis.Redis(host=redis_host, port=redis_port, password=redis_password, db=redis_db)
+redis_host = "redis-service" #" #os.getenv("REDIS_HOST")
+redis_port = "6379" #os.getenv("REDIS_PORT")
+redis_password = "" #os.getenv("REDIS_PASSWORD")
+redis_db = "0" #os.getenv("REDIS_DB")
+
+try:
+    redis_conn = redis.Redis(host=redis_host, port=redis_port, password=redis_password, db=redis_db)
+except redis.exceptions.ConnectionError as e:
+    print("Redis connection error:", e)
 
 @app.route('/flush', methods=['GET'])
 def flush_db():

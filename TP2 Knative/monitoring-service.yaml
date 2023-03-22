@@ -1,0 +1,25 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: monitoring-service
+  namespace: monitoring-app-namespace
+spec:
+  template:
+    metadata:
+      name: monitoring-service-v1
+    spec:
+      containers:
+        - name: monitoring-ctn
+          image: docker.io/tizianoadv/monitor:latest
+          ports:
+            - containerPort: 8080
+          env:
+            - name: REDIS_HOST
+              value: "database-service"
+            - name: REDIS_PORT
+              value: "80"
+            - name: REDIS_PASSWORD
+              value: ""
+            - name: REDIS_DB
+              value: "0"
+            

@@ -1,0 +1,10 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: database-service
+  namespace: monitoring-app-namespace
+spec:
+  ports:
+    - name: redis
+      port: 6379
+      targetPort: 6379

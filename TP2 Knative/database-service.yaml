@@ -1,0 +1,15 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: database-service
+  namespace: monitoring-app-namespace
+spec:
+  template:
+    metadata:
+      name: database-service-v1
+    spec:
+      containers:
+        - name: database-ctn
+          image: redis:latest
+          ports:
+            - containerPort: 6379

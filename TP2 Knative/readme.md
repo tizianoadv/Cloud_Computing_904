@@ -43,8 +43,35 @@ kubectl apply --filename https://github.com/knative/serving/releases/download/v0
 
 kubectl expose deployment monitor-deployment --port=8080 --type=NodePort
 
+kn service update database-service --image=redis:latest
+kn service update monitoring-service --image=docker.io/tizianoadv/monitor:latest
+kn service delete monitoring-service
+kn service create monitoring-service --image=docker.io/tizianoadv/monitor:latest
+
+
 
 minikube ip
 
 dashboard not working 
 https://github.com/microsoft/WSL/issues/4199#issuecomment-668270398
+
+
+
+brew tap knative-sandbox/kn-plugins
+brew install func
+
+
+# Install knative CLI & Knative cluster using minikube
+https://knative.dev/docs/install/quickstart-install/
+
+
+docker build -t monitor -f Dockerfile.function .
+docker tag monitor:latest tizianoadv/monitor:latest
+docker push tizianoadv/monitor:latest
+kn service delete database-service
+kn service delete monitoring-service
+kubectl apply -f database-service.yaml
+kubectl apply -f monitoring-service.yaml
+kn service list
+
+kubectl logs -l serving.knative.dev/service=monitoring-service -f
