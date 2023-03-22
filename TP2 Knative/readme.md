@@ -1,3 +1,23 @@
+# Install knative CLI & Knative cluster using minikube
+https://knative.dev/docs/install/quickstart-install/
+
+# CDR - Knative serving installation
+kubectl apply --filename https://github.com/knative/serving/releases/download/v0.26.0/serving-crds.yaml
+
+
+minikube ip
+minikube tunnel
+minikube tunnel --cleanup
+
+# Possible issues
+## Dashboard not working
+https://github.com/microsoft/WSL/issues/4199#issuecomment-668270398
+
+# Push custom Docker image to registery
+docker build -t monitor -f Dockerfile.function .
+docker tag monitor:latest tizianoadv/monitor:latest
+docker push tizianoadv/monitor:latest
+
 kubectl describe ksvc monitor
 kubectl get ksvc monitor
 kubectl apply -f function.yml
@@ -21,9 +41,7 @@ kubectl port-forward monitor-deployment-5f968c5c7c-fx9p2 8888:8080
 
 
 
-docker build -t monitor -f Dockerfile.function .
-docker tag monitor:latest tizianoadv/monitor:latest
-docker push tizianoadv/monitor:latest
+
 kubectl get pods
 kubectl delete pods
 
@@ -32,12 +50,6 @@ kubectl get svc monitor-deployment --namespace default --output 'jsonpath={.spec
 http://192.168.49.2:30116/data
 kubectl get ksvc monitor-deployment --output=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
 
-curl -X POST -H "Content-Type: application/json" -d "{\"timestamp\": \"2022-03-15T15:30:00\", \"temperature\":\"25.5\", \"humidity\": \"60\"}" http://localhost:8888/data
-
-curl -X POST -H "Content-Type: application/json" -d '{"temperature": 25.67, "humidity": 60.34, "luminosity": 32.45, "timestamp": "2023-03-16 12:34:56"}' http://localhost:8888/data
-
-minikube tunnel
-minikube tunnel --cleanup
 
 CDR - Knative serving installation
 kubectl apply --filename https://github.com/knative/serving/releases/download/v0.26.0/serving-crds.yaml
@@ -51,10 +63,9 @@ kn service create monitoring-service --image=docker.io/tizianoadv/monitor:latest
 
 
 
-minikube ip
 
-dashboard not working 
-https://github.com/microsoft/WSL/issues/4199#issuecomment-668270398
+
+
 
 
 
