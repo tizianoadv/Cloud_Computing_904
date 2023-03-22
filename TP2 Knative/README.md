@@ -1,11 +1,11 @@
+# Monitoring application - IoT 
 
-# 
-# Prerequisites
+The application aims to create a serverless function to store and retrieve data in real-time. It uses the Knative framework and the Kubernetes Minikube cluster simulator to facilitate the deployment and management of the application. Data storage is provided by a Redis database. Redis was chosen for its ease of use and ability to store real-time data. The application is developed in Python and uses Flask to create a RESTful API that will allow the user to retrieve data stored in the Redis database in the form of JSON files. The entire system is deployed in a local environment using Minikube.
 
-## Install Kubernetes based on your system
-Follow the steps mentioned in the official [Kubernetes documentation](https://kubernetes.io/docs/tasks/tools/) to install Kubernetes CLI.
+## Prerequisites
 
-## Install Knative CLI & Knative cluster using minikube
+Follow the steps mentioned in the official [Kubernetes documentation](https://kubernetes.io/docs/tasks/tools/) to install Kubernetes CLI
+
 Follow the steps mentioned in the official [Knative documentation](https://knative.dev/docs/install/quickstart-install/) to install Knative CLI & Knative cluster using minikube.
 
 # Memo
