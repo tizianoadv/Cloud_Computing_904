@@ -38,7 +38,7 @@ Use the following Minikube commands:
 - `kubectl port-forward <pod> 8888:8080`: This command forwards traffic from the local machine to the specified pod.
 - `kubectl apply -f <manifest>`: This command creates or updates Kubernetes resources in the specified manifest file.
 - `kubectl logs -l serving.knative.dev/service=<service> -f`: This command retrieves the logs for the specified Knative service.
-- `kubectl logs <deployment>-5f968c5c7c-h8qx4 -c <container>`: This command retrieves the logs for the specified container within the specified deployment.
+- `kubectl logs <deployment> -c <container>`: This command retrieves the logs for the specified container within the specified deployment.
 - `kubectl get pods --namespace <namespace>`: This command retrieves information about the pods in the specified namespace.
 - `kubectl describe ksvc <pod>`: This command retrieves detailed information about the specified Knative service.
 - `kubectl get ksvc <pod>`: This command retrieves information about the specified Knative service.
