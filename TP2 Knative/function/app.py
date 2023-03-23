@@ -4,10 +4,10 @@ import redis, os
 app = Flask(__name__)
 
 # connect to Redis database
-redis_host = "redis-service" #" #os.getenv("REDIS_HOST")
-redis_port = "6379" #os.getenv("REDIS_PORT")
-redis_password = "" #os.getenv("REDIS_PASSWORD")
-redis_db = "0" #os.getenv("REDIS_DB")
+redis_host = os.getenv("REDIS_HOST")
+redis_port = os.getenv("REDIS_PORT")
+redis_password = os.getenv("REDIS_PASSWORD")
+redis_db = os.getenv("REDIS_DB")
 
 try:
     redis_conn = redis.Redis(host=redis_host, port=redis_port, password=redis_password, db=redis_db)
